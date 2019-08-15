@@ -1,32 +1,34 @@
-def read(filename):
+
+
+def read_file(filename):
 	lines = []
-	with open(filename, 'r', encoding='utf-8-sig') as f:#sig-刪除開頭\utff簽名檔
+	with open(filename, 'r', encoding='utf-8-sig') as f:#sig:是去除txt開頭簽名檔
 		for line in f:
 			lines.append(line.strip())
 	return lines
 
 def convert(lines):
 	new = []
-	preson = None
+	preson = None#代表空值
 	for line in lines:
-		if 'Allen' == line:
+		if line == 'Allen':
 			preson = 'Allen'
 			continue
-		elif 'Tom' in line:
+		elif line == 'Tom':
 			preson = 'Tom'
 			continue
 		if preson:
-			new.append(preson + ':' + line)#不懂這段????
-	return new
+			new.append(preson + ':' + line)#不太懂意思
+	return new		
 
-
-def write(filename, lines):
-	with open(filename, 'w', encoding='utf-8') as f:
+def write_file(filename, lines):
+	with open(filename, 'w') as f:
 		for line in lines:
 			f.write(line + '\n')
 
 
-lines = read('input.txt')
-lines = convert(lines)
-write('output.txt', lines)
-print(lines)
+def main():
+	lines = read_file('input.txt')
+	lines = convert(lines)
+	write_file('output.txt', lines)
+main()
